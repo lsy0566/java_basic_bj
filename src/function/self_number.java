@@ -5,43 +5,62 @@ import java.util.Scanner;
 // 셀프 넘버
 public class self_number {
 
-	static void d(int n) {
+	static int d(int n) {
+		int sum = 0;
+//		boolean[] test = new boolean[10500];
+		String ia = Integer.toString(n);
 
+		if (n < 10) {
+			sum = n + n;
+		} else if (n < 100) {
+			sum = n + ia.charAt(0) - '0' + ia.charAt(1) - '0';
+		} else if (n < 1000) {
+			sum = n + ia.charAt(0) - '0' + ia.charAt(1) - '0' + ia.charAt(2) - '0';
+		} else if (n < 10000) {
+			sum = n + ia.charAt(0) - '0' + ia.charAt(1) - '0' + ia.charAt(2) - '0' + ia.charAt(3) - '0';
+		}
+
+		return sum;
 	}
 
 	public static void main(String[] args) {
-		Scanner s = new Scanner(System.in);
-		String n = s.next();
-		int sum = 0;
-		int[] a = new int[n.length()];
-		int[] test = new int[10000];
-		System.out.println(n.length());
-		System.out.println(Integer.parseInt(n) + n.charAt(1) - '0' + n.charAt(0) - '0');
+		boolean[] test = new boolean[10500];
+
 		for (int i = 0; i < 10000; i++) {
-			String ia = Integer.toString(i);
-			if(i<10) {
-				sum = i + i;
-//				System.out.println(sum);
-				test[i] = sum;
-			} else if (i<100) {
-				sum = i + ia.charAt(0) - '0' + ia.charAt(1) - '0';
-				test[i] = sum;
-//				System.out.println(sum);
-			} else if (i<1000){
-				sum = i + ia.charAt(0) - '0' + ia.charAt(1) - '0' + ia.charAt(2) - '0';
-				test[i] = sum;
-			} else if (i<10000) {
-				sum = i + ia.charAt(0) - '0' + ia.charAt(1) - '0' + ia.charAt(2) - '0' + ia.charAt(3) - '0';
-				test[i] = sum;
+			int n = d(i);
+
+			if (n < 10000) {
+				test[n] = true;
 			}
 		}
 
-		for(int e : test) {
-			System.out.println(e);
+		for (int i = 0; i < 10000; i++) {
+			if(!test[i]) {
+				System.out.println(i);
+			}
 		}
 
-//		d(n);
-
+//		for (int i = 0; i < 10000; i++) {
+//			String ia = Integer.toString(i);
+//			if (i < 10) {
+//				sum = i + i;
+//				test[sum] = true; // true가 곧 셀프넘버가 아니라는 소리 => sum이 생성자
+//			} else if (i < 100) {
+//				sum = i + ia.charAt(0) - '0' + ia.charAt(1) - '0';
+//				test[sum] = true;
+//			} else if (i < 1000) {
+//				sum = i + ia.charAt(0) - '0' + ia.charAt(1) - '0' + ia.charAt(2) - '0';
+//				test[sum] = true;
+//			} else if (i < 10000 && sum < 10000) {
+//				sum = i + ia.charAt(0) - '0' + ia.charAt(1) - '0' + ia.charAt(2) - '0' + ia.charAt(3) - '0';
+//				test[sum] = true;
+//			}
+//		}
+//
+//		for (int i = 0; i < 10000; i++) {
+//			if (!test[i]) {
+//				System.out.println(i);
+//			}
+//		}
 	}
-
 }
